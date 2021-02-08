@@ -1,0 +1,70 @@
+#DataTransforationSolutions
+
+#Exercise 5.2.4
+
+#Had an arrival delay two or more hours
+
+filter(flights, arr_delay >= 120)
+
+#Flew to Houstion (IAH or HOU)
+
+filter(flights, dest == 'IAH' | dest == 'HOU')
+
+
+#Were operated by United, American, or Delta
+
+filter(flights, carrier == 'UA', carrier ==  'AA', carrier == 'DAL')
+
+
+# Departed in Summer(July, August and September)
+
+filter(flights, month  == 7 | month == 8 | month == 9)
+
+# Arrived more than two hours late, but didn’t leave late
+
+filter(flights, arr_delay >= 120 & dep_delay <= 0)
+
+# Were delayed by at least an hour, but made up over 30 minutes in flight
+
+filter(flights, arr_delay >= 60 & dep_delay-arr_delay >30) 
+
+# Departed between midnight and 6am (inclusive)
+
+filter(flights, dep_time <= 600 | dep_time == 2400 )
+
+#Another useful dplyr filtering helper is between(). 
+#What does it do? Can you use it to simplify the code needed to answer the previous challenges?
+
+#This is a shortcut for x >= left & x <= right, 
+#implemented efficiently in C++ for local values, 
+#and translated to the appropriate SQL for remote tables.
+
+filter(flights, between(month, 7,9))
+
+filter(flights, between(dep_time, 601,2359))
+
+
+
+
+#How many flights have a missing dep_time? 
+#What other variables are missing? 
+#What might these rows represent?
+
+summary(flights)  
+
+#Missing Flights 8255
+#Other Missing Variables, Departure delay, Arrival Delay, Air Time, Arrival Time
+#Could either be lost data, or flights that were later rerouted.
+
+#Why is NA ^ 0 not missing? 
+
+#NA^0 evaluates to 1, because anything to the power of 0 is 1. 
+
+#Why is NA | TRUE not missing? 
+
+#NA | TRUE, This evaluates to True because either of the terms could be true, so the whole expression returns TRUE
+
+#Why is FALSE & NA not missing? Can you figure out the general rule? (NA * 0 is a tricky counterexample!)
+
+#In 'FALSE & NA' one of the terms is Flase, so the whole expression evaluates to 'FALSE'
+
