@@ -68,3 +68,60 @@ summary(flights)
 
 #In 'FALSE & NA' one of the terms is Flase, so the whole expression evaluates to 'FALSE'
 
+
+
+
+#5.4.1 Exercises
+
+#Brainstorm as many ways as possible to select dep_time, dep_delay, arr_time, and arr_delay from flights.
+
+
+
+
+select(flights, dep_time,dep_delay, arr_time,arr_delay, everything())
+
+select(flights, contains("Dep"), contains("arr"))
+
+select(flights, c(dep_time, dep_delay, arr_time, arr_delay))
+
+flights %>% select(dep_time,dep_delay, arr_time, arr_delay)
+
+
+
+
+
+#What happens if you include the name of a variable multiple times in a select() call?
+
+#Nothing you just get the variable once
+
+select(flights, distance,distance, distance)
+
+
+
+
+#What does the any_of() function do?
+#Why might it be helpful in conjunction with this vector?
+
+
+#vars <- c("year", "month", "day", "dep_delay", "arr_delay")
+
+#Any of will select any of the variables within a vector, and save you having to write out all the text
+
+vars <-c("year", "month", "day", "dep_delay", "arr_delay")
+
+select(flights, any_of(vars))
+
+
+
+
+
+#Does the result of running the following code surprise you? 
+#How do the select helpers deal with case by default?
+#How can you change that default?
+
+#Defaulthelperfunctions are insensitive to case
+
+select(flights, contains("TIME"))
+
+
+
